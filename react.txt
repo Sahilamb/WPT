@@ -1,0 +1,97 @@
+
+----app1 weight converter-----
+
+-----App.cs----
+.App {
+  text-align: center;
+  margin-top: 50px;
+}
+
+input {
+  margin-left: 10px;
+}
+
+button {
+  margin-top: 10px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+
+-----App.js--------
+import React, { useState } from 'react';
+import './App.css';
+
+function App() {
+  const [inputValue, setInputValue] = useState('');
+  const [result, setResult] = useState(null);
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+    setResult(null); // Reset result when input changes
+  };
+
+  const convertToGram = () => {
+    const kilograms = parseFloat(inputValue);
+    const grams = kilograms * 1000;
+    setResult(`${kilograms} kg is equal to ${grams} grams`);
+  };
+
+  const convertToKilogram = () => {
+    const grams = parseFloat(inputValue);
+    const kilograms = grams / 1000;
+    setResult(`${grams} grams is equal to ${kilograms} kg`);
+  };
+
+  return (
+    <div className="App">
+      <h1>Kilogram-Gram Converter</h1>
+      <label>
+        Enter weight:
+        <input type="number" value={inputValue} onChange={handleInputChange} />
+      </label>
+      <br />
+      <button onClick={convertToGram}>Convert to Gram</button>
+      <button onClick={convertToKilogram}>Convert to Kilogram</button>
+      <br />
+      {result && <p>{result}</p>}
+    </div>
+  );
+}
+export default App;
+
+
+-------App.js for app2 cities----------
+
+import React, { useState } from 'react';
+
+const cities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Philadelphia'];
+
+function App() {
+  const [selectedCity, setSelectedCity] = useState('');
+
+  const handleCitySelect = (e) => {
+    setSelectedCity(e.target.value);
+  }
+
+  return (
+    <div>
+      <h1>Select a City</h1>
+      <select onChange={handleCitySelect}>
+        <option value=''>Select a city</option>
+        {cities.map(city => (
+          <option key={city} value={city}>{city}</option>
+        ))}
+      </select>
+      
+      {selectedCity && (
+        <h2 style={{ textTransform: 'uppercase', backgroundColor: 'yellow' }}>
+          {selectedCity.toUpperCase()}
+        </h2>
+      )}
+    </div>
+  );
+}
+export default App;
+
+
