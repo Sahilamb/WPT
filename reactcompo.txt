@@ -1,0 +1,31 @@
+import React, { useState } from 'react';
+
+const InputList = () => {
+  const [inputValue, setInputValue] = useState('');
+  const [items, setItems] = useState([]);
+
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  }
+
+  const handleClick = () => {
+    setItems([...items, inputValue]);
+    setInputValue('');
+  }
+
+  return (
+    <div>
+      <input type="text" value={inputValue} onChange={handleChange} />
+      <button onClick={handleClick}>Add</button>
+      <div>
+        <ol>
+          {items.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  );
+}
+
+export default InputList;
